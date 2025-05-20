@@ -1,0 +1,332 @@
+/* Base Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mist Overlay with slow drifting animation */
+.overlay-mist {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150vw;
+  height: 150vh;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.03), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.06), transparent 50%);
+  animation: mistDrift 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(5px);
+  transform: translate3d(0,0,0);
+}
+
+@keyframes mistDrift {
+  0% {
+    transform: translate(0%, 0%);
+  }
+  50% {
+    transform: translate(-10%, 7%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+/* Rain Effect - full page background */
+.rain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  animation: fall linear infinite;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 2px rgba(255 255 255 / 0.4));
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+/* Container */
+.container {
+  position: relative;
+  max-width: 480px;
+  width: 90vw;
+  margin: 90px auto 120px auto;
+  padding: 32px 24px;
+  background: rgba(24, 24, 24, 0.85);
+  border-radius: 14px;
+  box-shadow: 0 0 30px rgba(187,0,0,0.4);
+  text-align: center;
+  z-index: 10;
+  animation: fadeIn 2.5s ease forwards;
+  overflow: hidden;
+}
+
+/* Rain inside container */
+.container-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.container-drop {
+  position: absolute;
+  bottom: 100%;
+  width: 2.5px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.75);
+  animation: fallContainer linear infinite;
+  border-radius: 50%;
+  filter: drop-shadow(0 0 2px rgba(255 255 255 / 0.6));
+}
+
+@keyframes fallContainer {
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* Title */
+.title {
+  font-size: 2.9rem;
+  color: #b03030;
+  margin-bottom: 24px;
+  font-weight: 700;
+  text-shadow: 0 0 8px #b03030;
+  animation: slowPulse 4s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+}
+
+/* Message Paragraphs */
+.message p {
+  font-size: 1.25rem;
+  line-height: 1.8;
+  margin-bottom: 18px;
+  animation: gentleFloat 6s ease-in-out infinite;
+  position: relative;
+  z-index: 10;
+}
+
+/* Image container */
+.image-container {
+  position: relative;
+  margin: 30px auto 35px auto;
+  max-width: 90vw;
+  width: 300px;
+  border-radius: 18px;
+  overflow: hidden;
+  filter: grayscale(90%) brightness(0.75);
+  box-shadow: 0 0 20px 3px rgba(176, 48, 48, 0.35);
+  animation: slowScale 3s ease forwards;
+  transform-origin: center;
+  z-index: 10;
+}
+
+.image-container img {
+  width: 100%;
+  display: block;
+  border-radius: inherit;
+  user-select: none;
+  pointer-events: none;
+  position: relative;
+  z-index: 10;
+}
+
+/* Tear drop styling and animations */
+.tear-drop {
+  position: absolute;
+  width: 10px;
+  height: 18px;
+  background: rgba(0, 120, 180, 0.85);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 0 0 5px 2px rgba(0, 200, 255, 0.6);
+  opacity: 0.9;
+  transform: translateX(-50%);
+  animation: tearDropFall 4.5s infinite ease-in;
+  left: 50%;
+  top: 30%;
+  z-index: 12;
+}
+
+.tear-drop2 {
+  left: 55%;
+  top: 20%;
+  width: 8px;
+  height: 14px;
+  opacity: 0.7;
+  animation-delay: 1.7s;
+}
+
+.tear-drop3 {
+  left: 50%;
+  top: 25%;
+  width: 9px;
+  height: 16px;
+  opacity: 0.75;
+  animation-delay: 3.2s;
+}
+
+/* Okay Button Styling */
+#okayButton {
+  background-color: #8a0000;
+  color: white;
+  border: none;
+  border-radius: 28px;
+  padding: 14px 56px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(138,0,0,0.8);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  animation: buttonPulse 3.8s ease-in-out infinite;
+  user-select: none;
+  position: relative;
+  z-index: 10;
+}
+
+#okayButton:hover, #okayButton:focus {
+  background-color: #b00000;
+  box-shadow: 0 0 28px rgba(176, 0, 0, 0.9);
+  outline: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes slowPulse {
+  0%, 100% {
+    text-shadow: 0 0 6px #b03030;
+    color: #b03030;
+  }
+  50% {
+    text-shadow: 0 0 15px #ff4444;
+    color: #ff4444;
+  }
+}
+
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-5px);
+    opacity: 0.88;
+  }
+}
+
+@keyframes slowScale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tearDropFall {
+  0% {
+    top: 30%;
+    opacity: 0.9;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 0 0 14px rgba(138,0,0,0.8);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(176,0,0,1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .title {
+    font-size: 2.3rem;
+  }
+  #okayButton {
+    width: 90%;
+    padding: 14px 0;
+    font-size: 1.1rem;
+  }
+  .container {
+    width: 95vw;
+    padding: 24px 16px;
+    margin: 50px auto 100px auto;
+  }
+  .image-container {
+    width: 90vw;
+  }
+  .message p {
+    font-size: 1.1rem;
+  }
+}
+
+/* Floating tear drop animation (optional from previous code) */
+.floating-tear {
+  position: fixed;
+  top: -20px;
+  width: 6px;
+  height: 12px;
+  background: rgba(0, 120, 180, 0.3);
+  border-radius: 50% / 60%;
+  box-shadow: 0 0 5px 2px rgba(0, 200, 255, 0.4);
+  opacity: 0.5;
+  pointer-events: none;
+  animation: floatingTearDrift linear infinite;
+}
+
+@keyframes floatingTearDrift {
+  from {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
